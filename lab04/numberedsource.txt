@@ -1,0 +1,2508 @@
+
+
+2012-02-17 10:05 src/edu/ucsb/cs56/W12/nlmarks/lab04/AllMyOwnDrawings.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import java.awt.Graphics2D;
+    3	import java.awt.geom.Line2D;  // single lines
+    4	import java.awt.geom.Ellipse2D;  // ellipses and circles
+    5	import java.awt.geom.Rectangle2D; // for the bounding box
+    6	import java.awt.Rectangle;  // squares and rectangles
+    7	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    8	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    9	import java.awt.Shape; // general class for shapes
+   10	import java.awt.Color; // class for Colors
+   11	import java.awt.Stroke;
+   12	import java.awt.BasicStroke;
+   13	/**
+   14	 * A class with a static method for drawing StickFigures
+   15	 * 
+   16	 * @author Nicholas Marks and Marco Sedano
+   17	 * @version for CS56 lab04, Winter 2012
+   18	 */
+   19	
+   20	
+   21	public class AllMyOwnDrawings
+   22	{
+   23	    /** Draw a picture with a few StickFigures
+   24	     */
+   25	
+   26	    public static void drawPicture1(Graphics2D g2) {
+   27	
+   28		StickFigure sf = new StickFigure(200,200,25);
+   29		g2.setColor(Color.RED);
+   30		g2.draw(sf);
+   31	
+   32		StickFigure sf2 = new StickFigure(500,100,50);
+   33		g2.setColor(Color.BLUE);
+   34		g2.draw(sf2);
+   35	    }   
+   36	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-17 10:09 src/edu/ucsb/cs56/W12/nlmarks/lab04/MyPictureComponent01.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	
+    8	
+    9	// the four tools things we'll use to draw
+   10	
+   11	import java.awt.geom.Line2D;  // single lines
+   12	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   13	import java.awt.Rectangle;  // squares and rectangles
+   14	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   15	
+   16	
+   17	import java.awt.geom.Rectangle2D; // for rectangles drawing with Doubles
+   18	
+   19	import java.awt.Color; // class for Colors
+   20	import java.awt.Shape; // Shape interface
+   21	import java.awt.Stroke; // Stroke interface
+   22	import java.awt.BasicStroke; // class that implements stroke
+   23	
+   24	/**
+   25	   A component that draws a Picture by Phill Conrad. 
+   26	   Edited for use by Nicholas Marks and Marco Sedano. 
+   27	   
+   28	   @author Nicholas Marks and Marco Sedano
+   29	   @version for CS56, W12, UCSB, 02/16/2012
+   30	   
+   31	*/
+   32	
+   33	
+   34	public class MyPictureComponent01 extends JComponent
+   35	{  
+   36	
+   37	    /** The paintComponent method is always required if you want
+   38	     * any graphics to appear in your JComponent.    
+   39	     * 
+   40	     * There is a paintComponent
+   41	     * method that is created for you in the JComponent class, but it
+   42	     * doesn't do what we want, so we have to "override" that method with
+   43	     * our own method.  
+   44	     */
+   45	    
+   46	   public void paintComponent(Graphics g)
+   47	   {  
+   48	
+   49	       Graphics2D g2 = (Graphics2D) g;
+   50	
+   51	       // Call a static method for drawing picture 2
+   52	
+   53	       AllMyOwnDrawings.drawPicture1(g2);
+   54	
+   55	   }
+   56	        
+
+
+
+
+
+
+
+2012-02-17 10:09 src/edu/ucsb/cs56/W12/nlmarks/lab04/MyPictureComponent01.java Page 2
+
+
+   57	  
+   58	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 22:57 src/edu/ucsb/cs56/W12/nlmarks/lab04/MyPictureViewer01.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import javax.swing.JFrame;
+    3	
+    4	/** A viewer class to see a picture I drew with 
+    5	 *  just three simple Java graphics objects, namely
+    6	 *  Rectangle, Line2D.Double, Ellipse2D.Double
+    7	 *  
+    8	 * @author Nicholas Marks and Marco Sedano 
+    9	 * @version for UCSB CS56, W12, 02/16/2012
+   10	 */
+   11	
+   12	public class MyPictureViewer01
+   13	{
+   14	   public static void main(String[] args)
+   15	   {
+   16	      JFrame frame = new JFrame();
+   17	      
+   18	      // Set the size to whatever size you like (width, height)
+   19	      // For projects you turn in, lets not get any bigger than 640,480
+   20	      
+   21	      frame.setSize(800,500); // @@@ MODIFY THIS LINE IF YOU LIKE
+   22	      
+   23	      // Set your own title
+   24	      frame.setTitle("Nicholas and Marco's First Drawing"); // @@@ MODIFY THIS LINE
+   25	      
+   26	      // Always do this so that the red X (or red circle) works
+   27	      // to close the window. 
+   28	      
+   29	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   30	      
+   31	      // Instantiate your drawing as a "component"
+   32	      
+   33	      MyPictureComponent01 component = new MyPictureComponent01();
+   34	      
+   35	      // Always add your component to the frame 
+   36	      // and then make the window visible
+   37	      
+   38	      frame.add(component);
+   39	      frame.setVisible(true);
+   40	   }
+   41	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-15 15:42 src/edu/ucsb/cs56/W12/nlmarks/lab04/SimpleGui1.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import javax.swing.*;
+    3	
+    4	/** SimpleGui1 comes from Head First Java 2nd Edition p. 355.
+    5	      It illustrates a simple GUI with a Button that doesn't do anything yet.
+    6	
+    7	     @author Head First Java, 2nd Edition p. 355
+    8	     @author P. Conrad (who only typed it in and added the Javadoc comments)
+    9	     @version CS56, Winter 2012, UCSB
+   10	*/
+   11	
+   12	public class SimpleGui1 {
+   13	
+   14	    /** main method to fire up a JFrame on the screen  
+   15	          @param args not used
+   16	    */
+   17	
+   18	    public static void main (String[] args) {
+   19		JFrame frame = new JFrame() ;
+   20		JButton button = new JButton("click me") ;
+   21		frame. setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE) ;
+   22		frame. getContentPane() . add(button) ;
+   23		frame. setSize(300,300) ;
+   24		frame. setVisible(true) ;
+   25	    }
+   26	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-17 10:10 src/edu/ucsb/cs56/W12/nlmarks/lab04/StickFigure.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    3	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    4	import java.awt.Shape; // general class for shapes
+    5	import edu.ucsb.cs56.W12.pconrad.lab04.GeneralPathWrapper;
+    6	import edu.ucsb.cs56.W12.pconrad.lab04.Circle;
+    7	
+    8	// all imports below this line needed if you are implementing Shape
+    9	import java.awt.geom.Point2D; 
+   10	import java.awt.geom.Line2D; 
+   11	import java.awt.geom.Rectangle2D;
+   12	import java.awt.Rectangle;
+   13	import java.awt.geom.PathIterator;
+   14	import java.awt.geom.AffineTransform;
+   15	
+   16	
+   17	/**
+   18	   A vector drawing of a Stick Figure that implements
+   19	   the Shape interface, and so can be drawn, as well as
+   20	   rotated, scaled, etc.
+   21	      
+   22	   @author Nicholas Marks and Marco Sedano 
+   23	   @version for CS56, Winter 11, UCSB, Lab04
+   24	   
+   25	*/
+   26	public class StickFigure extends GeneralPathWrapper implements Shape
+   27	{
+   28	    /**
+   29	       @param x x coord of center of head
+   30	       @param y y coord of center of head 
+   31	       @param radius radius of the head and used to scale the body 
+   32	     */
+   33	    public StickFigure(double x, double y, double radius)
+   34	    {
+   35	    
+   36	        // Rather than having to scale at the end, we can just
+   37	        // draw things the right way to begin with, using the
+   38	        // x, y, width and height.   If you haven't already
+   39	        // hard coded a particular drawing, this may be an easier
+   40	        // way.
+   41	        
+   42	        
+   43		Circle head = new Circle( x, y, radius);
+   44		
+   45		Line2D.Double body = new Line2D.Double(x, y+radius, x, y+4*radius);
+   46		Line2D.Double arms = new Line2D.Double(x-radius, y+2*radius, x+radius, y+2*radius);
+   47		Line2D.Double leftLeg = new Line2D.Double(x, y+4*radius, x-radius, y+5*radius);
+   48		Line2D.Double rightLeg = new Line2D.Double(x, y+4*radius, x+radius, y+5*radius);
+   49	
+   50		GeneralPath stickFigure = this.get();
+   51	
+   52		stickFigure.append(head, false);
+   53		stickFigure.append(body, false);
+   54		stickFigure.append(arms, false);
+   55		stickFigure.append(leftLeg, false);
+   56		stickFigure.append(rightLeg, false);
+
+
+
+
+
+
+
+2012-02-17 10:10 src/edu/ucsb/cs56/W12/nlmarks/lab04/StickFigure.java Page 2
+
+
+   57	    }
+   58	
+   59	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-17 10:11 src/edu/ucsb/cs56/W12/nlmarks/lab04/WriteMyPictureToFile.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.nlmarks.lab04;
+    2	import java.awt.image.BufferedImage;
+    3	import java.awt.Graphics2D;
+    4	import java.awt.Color;
+    5	import java.io.File;
+    6	import javax.imageio.ImageIO;
+    7	import java.io.IOException;
+    8	
+    9	
+   10	
+   11	
+   12	/**
+   13	 *  A class with a main method that can write a drawing to a graphics file.
+   14	 *  
+   15	 *  @author P. Conrad, edit by Nicholas Marks and Marco Sedano
+   16	 *  @version for CS56, W11, UCSB, Lab04, 2/16/12
+   17	 */
+   18	
+   19	public class WriteMyPictureToFile
+   20	{
+   21	    public static void usage()
+   22	    {
+   23	       System.out.println("Usage: java WriteMyPictureToFile mypic1");
+   24	       // @@@ modify the next line to describe your picture
+   25	       System.out.println(" Nicholas Marks and Marco Sedano Write a lovely picture of Stick Figures to mypic1.png"); 
+   26	    }
+   27	
+   28	    /** Write the Stick Figure picture to a file.
+   29	     * 
+   30	     * @param args  The first command line argument is the file to write to.  We leave off the extension
+   31	     *              because that gets put on automatically.
+   32	     */
+   33	
+   34	   public static void main(String[] args)
+   35	   {
+   36	     // make sure we have exactly one command line argument  
+   37	     if (args.length != 1)
+   38	     {
+   39	        usage();
+   40	        System.exit(1);
+   41	     }
+   42	        
+   43	     String outputfileName = args[0]; // the first command line argument
+   44	     
+   45	     final int WIDTH = 640;
+   46	     final int HEIGHT = 480;
+   47	         
+   48	     // create a new image
+   49	     // TYPE_INT_ARGB is "RGB image" with transparency (A = alpha channel)
+   50	     
+   51	     BufferedImage bi = 
+   52	        new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB); 
+   53	
+   54	     Graphics2D g2 = bi.createGraphics();
+   55	      
+   56	     AllMyOwnDrawings.drawPicture1(g2); // draw stick figure 
+
+
+
+
+
+
+
+2012-02-17 10:11 src/edu/ucsb/cs56/W12/nlmarks/lab04/WriteMyPictureToFile.java Page 2
+
+
+   57	      
+   58	     final String imageType = "png"; // choices: "gif", "png", "jpg"
+   59	      
+   60	     String fullFileName = ""; // must declare outside the try block, so we can see it inside the catch block
+   61	     
+   62	     try 
+   63	     {
+   64	        fullFileName = outputfileName + "." + imageType; // make the file name
+   65	        File outputfile = new File(fullFileName); // the file we will try to write
+   66	        ImageIO.write(bi, imageType, outputfile); // actually write it
+   67	        System.out.println("I created " + fullFileName); // tell the user
+   68	     } 
+   69	     catch (IOException e)
+   70	     {
+   71	      System.err.println("Sorry, an error occurred--I could not create "+ fullFileName +"\n The error was: "+ e.toString());
+   72	     }
+   73	
+   74	      
+   75	   }
+   76	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/AllMyDrawings.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics2D;
+    3	import java.awt.geom.Line2D;  // single lines
+    4	import java.awt.geom.Ellipse2D;  // ellipses and circles
+    5	import java.awt.geom.Rectangle2D; // for the bounding box
+    6	import java.awt.Rectangle;  // squares and rectangles
+    7	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    8	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    9	import java.awt.Shape; // general class for shapes
+   10	import java.awt.Color; // class for Colors
+   11	import java.awt.Stroke;
+   12	import java.awt.BasicStroke;
+   13	/**
+   14	 * A class with static methods for drawing various pictures
+   15	 * 
+   16	 * @author Phill Conrad 
+   17	 * @version for CS10, lab06, Spring 2009
+   18	 */
+   19	
+   20	
+   21	public class AllMyDrawings
+   22	{
+   23	    /** Draw a picture with a few houses 
+   24	     */
+   25	
+   26	    public static void drawPicture1(Graphics2D g2) {
+   27	
+   28		House h1 = new House(100,250,50,75);
+   29		g2.setColor(Color.CYAN); g2.draw(h1);
+   30		
+   31		// Make a black house that's half the size, 
+   32		// and moved over 150 pixels in x direction
+   33	
+   34		Shape h2 = ShapeTransforms.scaledCopyOfLL(h1,0.5,0.5);
+   35		h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
+   36		g2.setColor(Color.BLACK); g2.draw(h2);
+   37		
+   38		// Here's a house that's 4x as big (2x the original)
+   39		// and moved over 150 more pixels to right.
+   40		h2 = ShapeTransforms.scaledCopyOfLL(h2,4,4);
+   41		h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
+   42		
+   43		// We'll draw this with a thicker stroke
+   44		Stroke thick = new BasicStroke (4.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);       
+   45		
+   46		// for hex colors, see (e.g.) http://en.wikipedia.org/wiki/List_of_colors
+   47		// #002FA7 is "International Klein Blue" according to Wikipedia
+   48		// In HTML we use #, but in Java (and C/C++) its 0x
+   49		
+   50		Stroke orig=g2.getStroke();
+   51		g2.setStroke(thick);
+   52		g2.setColor(new Color(0x002FA7)); 
+   53		g2.draw(h2); 
+   54		
+   55		// Draw two houses with Windows
+   56		
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/AllMyDrawings.java Page 2
+
+
+   57		HouseWithWindows hw1 = new HouseWithWindows(50,350,40,75);
+   58		HouseWithWindows hw2 = new HouseWithWindows(200,350,200,100);
+   59		
+   60		g2.draw(hw1);
+   61		g2.setColor(new Color(0x8F00FF)); g2.draw(hw2);
+   62		
+   63		// @@@ FINALLY, SIGN AND LABEL YOUR DRAWING
+   64		
+   65		g2.setStroke(orig);
+   66		g2.setColor(Color.BLACK); 
+   67		g2.drawString("A few houses by Phill Conrad", 20,20);
+   68	    }
+   69	
+   70	
+   71	    /** Draw a picture with a few houses and coffee cups
+   72	     */
+   73	    public static void drawPicture2(Graphics2D g2) {
+   74	
+   75		// Draw some coffee cups.
+   76		
+   77		CoffeeCup large = new CoffeeCup(100,50,225,150);
+   78		CoffeeCup smallCC = new CoffeeCup(20,50,40,30);
+   79		CoffeeCup tallSkinny = new CoffeeCup(20,150,20,40);
+   80		CoffeeCup shortFat = new CoffeeCup(20,250,40,20);
+   81		
+   82		g2.setColor(Color.RED);     g2.draw(large);
+   83		g2.setColor(Color.GREEN);   g2.draw(smallCC);
+   84		g2.setColor(Color.BLUE);    g2.draw(tallSkinny);
+   85		g2.setColor(Color.MAGENTA); g2.draw(shortFat);
+   86		
+   87		House h1 = new House(100,250,50,75);
+   88		g2.setColor(Color.CYAN); g2.draw(h1);
+   89		
+   90		// Make a black house that's half the size, 
+   91		// and moved over 150 pixels in x direction
+   92		Shape h2 = ShapeTransforms.scaledCopyOfLL(h1,0.5,0.5);
+   93		h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
+   94		g2.setColor(Color.BLACK); g2.draw(h2);
+   95		
+   96		// Here's a house that's 4x as big (2x the original)
+   97		// and moved over 150 more pixels to right.
+   98		h2 = ShapeTransforms.scaledCopyOfLL(h2,4,4);
+   99		h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
+  100		
+  101		// We'll draw this with a thicker stroke
+  102		Stroke thick = new BasicStroke (4.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);       
+  103		
+  104		// for hex colors, see (e.g.) http://en.wikipedia.org/wiki/List_of_colors
+  105		// #002FA7 is "International Klein Blue" according to Wikipedia
+  106		// In HTML we use #, but in Java (and C/C++) its 0x
+  107		
+  108		Stroke orig=g2.getStroke();
+  109		g2.setStroke(thick);
+  110		g2.setColor(new Color(0x002FA7)); 
+  111		g2.draw(h2); 
+  112		
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/AllMyDrawings.java Page 3
+
+
+  113		// Draw two houses with Windows
+  114		
+  115		HouseWithWindows hw1 = new HouseWithWindows(50,350,40,75);
+  116		HouseWithWindows hw2 = new HouseWithWindows(200,350,200,100);
+  117		
+  118		g2.draw(hw1);
+  119		g2.setColor(new Color(0x8F00FF)); 
+  120	
+  121		// Rotate the second house 45 degrees around its center.
+  122		Shape hw3 = ShapeTransforms.rotatedCopyOf(hw2, Math.PI/4.0);
+  123	
+  124		g2.draw(hw3);
+  125		
+  126		// @@@ FINALLY, SIGN AND LABEL YOUR DRAWING
+  127		
+  128		g2.setStroke(orig);
+  129		g2.setColor(Color.BLACK); 
+  130		g2.drawString("A bunch of Coffee Cups and a few houses by Phill Conrad", 20,20);
+  131	    }
+  132	  
+  133	    /** Draw a different picture with a few houses and coffee cups
+  134	     */
+  135	
+  136	    public static void drawPicture3(Graphics2D g2) {
+  137		
+  138		// label the drawing
+  139		
+  140		g2.drawString("A bunch of Coffee Cups by Phill Conrad", 20,20);
+  141	
+  142		
+  143		// Draw some coffee cups.
+  144		
+  145	       CoffeeCup large = new CoffeeCup(100,50,225,150);
+  146	       CoffeeCup smallCC = new CoffeeCup(20,50,40,30);
+  147	       
+  148	       g2.setColor(Color.RED);     g2.draw(large);
+  149	       g2.setColor(Color.GREEN);   g2.draw(smallCC);
+  150	       
+  151	       
+  152	    }
+  153	    
+  154	
+  155	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-15 15:15 src/edu/ucsb/cs56/W12/pconrad/lab04/Circle.java  Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	
+    3	
+    4	
+    5	/**
+    6	 * Circle extends Ellipse2D to make it easier to draw circles
+    7	 * because the parameters to the constructor are more convenient
+    8	 * 
+    9	 * @author P. Conrad  
+   10	 * @version CS56, Winter 2012, UCSB
+   11	 */
+   12	public class Circle extends java.awt.geom.Ellipse2D.Double implements java.awt.Shape
+   13	{ 
+   14	    /**
+   15	     * Constructor for objects of class Circle
+   16	     * @param x    x coordinate of center of circle
+   17	     * @param y    y coordinate of center of circle
+   18	     * @param r    radius of circle
+   19	     */
+   20	    public Circle(double x, double y, double r)
+   21	    {
+   22	        // invoke the super class constructor,
+   23	        // i.e. the one for Ellipse2D.Double, which takes
+   24	        // upper-left-x, upper-left-y (of the bounding box)
+   25	        // width, and height
+   26	        
+   27	        super( x - r, y - r,   /* upper left corner of bounding box */
+   28	               r * 2,  r * 2); /* width and height are double the radius */
+   29	    }
+   30	    
+   31	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/CoffeeCup.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    3	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    4	import java.awt.Shape; // general class for shapes
+    5	
+    6	// all imports below this line needed if you are implementing Shape
+    7	import java.awt.geom.Point2D; 
+    8	import java.awt.geom.Rectangle2D;
+    9	import java.awt.Rectangle;
+   10	import java.awt.geom.PathIterator;
+   11	import java.awt.geom.AffineTransform;
+   12	
+   13	
+   14	/**
+   15	   A Coffee Cup (wrapper around a General Path, implements Shape)
+   16	
+   17	   This provides an example of how you can start with the coordinates
+   18	   of a hard coded object, and end up with an object that can be
+   19	   drawn anywhere, with any width or height.
+   20	   
+   21	      
+   22	   @author Phill Conrad 
+   23	   @version for CS56, W11, UCSB, 02/23/2011
+   24	   
+   25	*/
+   26	public class CoffeeCup extends GeneralPathWrapper implements Shape
+   27	{
+   28	
+   29	    
+   30	    /**
+   31	     * Constructor for objects of class CoffeeCup
+   32	     */
+   33	    public CoffeeCup(double x, double y, double width, double height)
+   34	    {
+   35	    
+   36	        // Specify the upper left corner, and the 
+   37	        //  width and height of the original points used to 
+   38	        //  plot the *hard-coded* coffee cup
+   39	        
+   40	        final double ORIG_ULX = 100.0; 
+   41	        final double ORIG_ULY = 100.0; 
+   42	        final double ORIG_HEIGHT = 300.0; 
+   43	        final double ORIG_WIDTH = 400.0; 
+   44	                
+   45	        GeneralPath leftSide = new GeneralPath();
+   46	      
+   47	        // left side of cup
+   48	       
+   49	        leftSide.moveTo(200,400);
+   50	        leftSide.lineTo(160,360);
+   51	        leftSide.lineTo(130,300);
+   52	        leftSide.lineTo(100,200);
+   53	        leftSide.lineTo(100,100);
+   54	        
+   55	        GeneralPath topAndBottom = new GeneralPath();
+   56	       
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/CoffeeCup.java Page 2
+
+
+   57	        topAndBottom.moveTo(100,100);
+   58	        topAndBottom.lineTo(500,100); // top of cup
+   59	        
+   60	        topAndBottom.moveTo(200,400);
+   61	        topAndBottom.lineTo(400,400); // bottom of cup
+   62	       
+   63	        Shape rightSide = ShapeTransforms.horizontallyFlippedCopyOf(leftSide);
+   64	       
+   65	        // after flipping around the upper left hand corner of the
+   66	        // bounding box, we move this over to the right by 400 pixels
+   67	       
+   68	        rightSide = ShapeTransforms.translatedCopyOf(rightSide, 400.0, 0.0);
+   69	       
+   70	        // now we put the whole thing together ino a single path.
+   71	       
+   72	        GeneralPath wholeCup = new GeneralPath ();
+   73	        wholeCup.append(topAndBottom, false);
+   74	        wholeCup.append(leftSide, false);
+   75	        wholeCup.append(rightSide, false);
+   76	
+   77	        // translate to the origin by subtracting the original upper left x and y
+   78	        // then translate to (x,y) by adding x and y
+   79	        
+   80	        Shape s = ShapeTransforms.translatedCopyOf(wholeCup, -ORIG_ULX + x, -ORIG_ULY + y);
+   81	 
+   82		// scale to correct height and width
+   83	        s =  ShapeTransforms.scaledCopyOf(s,
+   84						  width/ORIG_WIDTH,
+   85						  height/ORIG_HEIGHT) ;
+   86		 
+   87		// Use the GeneralPath constructor that takes a shape and returns
+   88		// it as a general path to set our instance variable cup
+   89	        
+   90		this.set(new GeneralPath(s));
+   91	        
+   92	    }
+   93	
+   94	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/GeneralPathWrapper.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	
+    3	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    4	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    5	import java.awt.Shape; // general class for shapes
+    6	
+    7	// next five imports below this line needed if you are implementing Shape
+    8	import java.awt.geom.Point2D; 
+    9	import java.awt.geom.Rectangle2D;
+   10	import java.awt.Rectangle;
+   11	import java.awt.geom.PathIterator;
+   12	import java.awt.geom.AffineTransform;
+   13	// end of list of imports needed for implementing Shape
+   14	
+   15	
+   16	/**
+   17	 Because GeneralPath is declared as "final", we can't extend it.
+   18	 That's inconvenient, because if we can declare shapes that
+   19	 extend GeneralPath, we get all of the methods of GeneralPath that
+   20	 implement the Shape interface.
+   21	
+   22	 That allows us to do graphics transformations like
+   23	 translating, rotating and scaling (the Affine transforms).
+   24	
+   25	 So, GeneralPathWrapper is a wrapper around a GeneralPath object
+   26	 that we can extend
+   27	
+   28	 * @author P. Conrad  
+   29	 * @version CS56, Winter 2011, UCSB
+   30	 */
+   31	
+   32	public class GeneralPathWrapper implements Shape
+   33	{ 
+   34	    private GeneralPath gp;
+   35	    
+   36	    public GeneralPathWrapper() {gp = new GeneralPath();}
+   37	
+   38	    /** If we already have a GeneralPath, we can wrap it. */
+   39	    public GeneralPathWrapper(GeneralPath gp) {this.gp = gp;}
+   40	
+   41	    /**
+   42	       Tests if the specified coordinates are inside the boundary of the
+   43	       Shape.
+   44	    */
+   45	   
+   46	    public GeneralPath get() {return gp;}
+   47	    public void set(GeneralPath gp) {this.gp = gp;}
+   48	
+   49	    public boolean contains(double x, double y)  { return gp.contains(x,y); }
+   50	    
+   51	    /**       Tests if the interior of the Shape entirely contains the
+   52	     *       specified rectangular area.
+   53	     */
+   54	
+   55	    public boolean contains(double x, double y, double w, double h) { return gp.contains(x,y,w,h); }
+   56	    
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/GeneralPathWrapper.java Page 2
+
+
+   57	    /**      Tests if a specified Point2D is inside the boundary of
+   58	     *      the Shape.
+   59	     */
+   60	
+   61	    public boolean contains(Point2D p) { return gp.contains(p); }
+   62	    
+   63	    /** 
+   64	     Tests if the interior of the Shape entirely contains the
+   65	     specified Rectangle2D.  
+   66	    */
+   67	    
+   68	    public boolean contains(Rectangle2D r) { return gp.contains(r); }
+   69	 
+   70	    /**      Returns an integer Rectangle that completely encloses the
+   71	     *      Shape.
+   72	     */
+   73	
+   74	    public Rectangle getBounds() { return gp.getBounds(); }
+   75	    
+   76	    /**      Returns a high precision and more accurate bounding box
+   77	     *      of the Shape than the getBounds method.
+   78	     */
+   79	
+   80	    public Rectangle2D getBounds2D() { return gp.getBounds2D(); }
+   81	
+   82	    /**          Returns an iterator object that iterates along the
+   83	     *          Shape boundary and provides access to the geometry of
+   84	     *          the Shape outline.
+   85	     */
+   86	
+   87	    public PathIterator getPathIterator(AffineTransform at) { return gp.getPathIterator( at); }
+   88	    
+   89	    /**          Returns an iterator object that iterates along the
+   90	     *          Shape boundary and provides access to a flattened view
+   91	     *          of the Shape outline geometry.
+   92	     */
+   93	    
+   94	    public PathIterator getPathIterator(AffineTransform at, double flatness) { return gp.getPathIterator( at,  flatness); }
+   95	
+   96	    /**      Tests if the interior of the Shape intersects the
+   97	     *      interior of a specified rectangular area.
+   98	     */
+   99	
+  100	    public boolean intersects(double x, double y, double w, double h) { return gp.intersects(x,  y, w, h);}
+  101	
+  102	    /** Tests if the interior of the Shape intersects the interior of
+  103	     * a specified Rectangle2D.
+  104	     */
+  105	
+  106	    public boolean intersects(Rectangle2D r) { return gp.intersects(r); }
+  107	    
+  108	    
+  109	
+  110	
+  111	}
+
+
+
+
+
+
+
+
+2012-02-16 21:20  src/edu/ucsb/cs56/W12/pconrad/lab04/House.java  Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    3	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    4	import java.awt.Shape; // general class for shapes
+    5	
+    6	// all imports below this line needed if you are implementing Shape
+    7	import java.awt.geom.Point2D; 
+    8	import java.awt.geom.Line2D; 
+    9	import java.awt.geom.Rectangle2D;
+   10	import java.awt.Rectangle;
+   11	import java.awt.geom.PathIterator;
+   12	import java.awt.geom.AffineTransform;
+   13	
+   14	
+   15	/**
+   16	   A vector drawing of a house that implements
+   17	   the Shape interface, and so can be drawn, as well as
+   18	   rotated, scaled, etc.
+   19	      
+   20	   @author Phill Conrad 
+   21	   @version for CS56, Winter 11, UCSB
+   22	   
+   23	*/
+   24	public class House extends GeneralPathWrapper implements Shape
+   25	{
+   26	    /**
+   27	       Constructor
+   28	
+   29	       @param x x coord of lower left corner of house
+   30	       @param y y coord of lower left corner of house
+   31	       @param width width of the house
+   32	       @param height of house (including first story and second story)
+   33	     */
+   34	    public House(double x, double y, double width, double height)
+   35	    {
+   36	    
+   37	        // Rather than having to scale at the end, we can just
+   38	        // draw things the right way to begin with, using the
+   39	        // x, y, width and height.   If you haven't already
+   40	        // hard coded a particular drawing, this may be an easier
+   41	        // way.
+   42	        
+   43	        double firstStoryHeight = .75 * height;
+   44	        double roofHeight = height - firstStoryHeight;
+   45	        
+   46	        double firstStoryUpperLeftY = y + roofHeight;
+   47	        
+   48	        // Make the first story
+   49	        
+   50	        Rectangle2D.Double firstStory = 
+   51	            new Rectangle2D.Double(x, firstStoryUpperLeftY ,
+   52	                          width, firstStoryHeight);
+   53	                          
+   54	        // make the roof.   Remember that y goes DOWN the page,
+   55	        // so we ADD to y to get a "lower" value on the screen
+   56	        
+
+
+
+
+
+
+
+2012-02-16 21:20  src/edu/ucsb/cs56/W12/pconrad/lab04/House.java  Page 2
+
+
+   57	        Line2D.Double leftRoof = 
+   58	            new Line2D.Double (x, y + roofHeight,
+   59	                               x + width/2.0, y);
+   60	                               
+   61	        Line2D.Double rightRoof =
+   62	            new Line2D.Double (x + width/2.0, y,
+   63	                               x + width, y + roofHeight);
+   64	
+   65	        // put the whole house together
+   66	       
+   67	        GeneralPath wholeHouse = this.get();
+   68	        wholeHouse.append(firstStory, false);
+   69	        wholeHouse.append(leftRoof, false);
+   70	        wholeHouse.append(rightRoof, false); 
+   71	        
+   72	    }
+   73	
+   74	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/HouseWithWindows.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.geom.GeneralPath; // combinations of lines and curves
+    3	import java.awt.geom.AffineTransform; // translation, rotation, scale
+    4	import java.awt.Shape; // general class for shapes
+    5	
+    6	// all imports below this line needed if you are implementing Shape
+    7	import java.awt.geom.Point2D; 
+    8	import java.awt.geom.Line2D; 
+    9	import java.awt.geom.Rectangle2D;
+   10	import java.awt.Rectangle;
+   11	import java.awt.geom.PathIterator;
+   12	import java.awt.geom.AffineTransform;
+   13	
+   14	
+   15	/**
+   16	   A House
+   17	      
+   18	   @author Phill Conrad 
+   19	   @version for CS56, W11, UCSB, 02/23/2011
+   20	   
+   21	*/
+   22	public class HouseWithWindows extends House implements Shape
+   23	{
+   24	    /**
+   25	     * Constructor for objects of class CoffeeCup
+   26	     */
+   27	    public HouseWithWindows(double x, double y, double width, double height)
+   28	    {
+   29		// construct the basic house shell
+   30		super(x,y,width,height);
+   31	
+   32		// get the GeneralPath that we are going to append stuff to
+   33		GeneralPath gp = this.get();
+   34		
+   35		// Make three windows, spaced like this, where w=width/10.0;
+   36		// | +--+ +--+ +--+ |
+   37		// | |  | |  | |  | |
+   38		// | +--+ +--+ +--+ |
+   39		// |w 2w w 2w w w2 w|
+   40		//
+   41		// The top of window will be at y + 0.5*height and the
+   42		// height of the window is 0.25height;
+   43	
+   44		double w = 0.10 * width;
+   45		double winTop = y + 0.5 * height;
+   46		double winHt =  0.25 * height;
+   47	
+   48		Rectangle2D.Double win1 =
+   49		    new Rectangle2D.Double(x + w, winTop, 2.0 * w, winHt);
+   50		Rectangle2D.Double win2 =
+   51		    new Rectangle2D.Double(x + 4.0*w, winTop, 2.0 * w, winHt);
+   52		Rectangle2D.Double win3 =
+   53		    new Rectangle2D.Double(x + 7.0*w, winTop, 2.0 * w, winHt);
+   54		
+   55		// add the windows to the house
+   56		// Look up the meaning of the second parameter of append
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/HouseWithWindows.java Page 2
+
+
+   57		// (Hint--is a method of "GeneralPath")
+   58	
+   59	        GeneralPath wholeHouse = this.get();
+   60	        wholeHouse.append(win1, false);
+   61	        wholeHouse.append(win2, false);
+   62	        wholeHouse.append(win3, false); 
+   63	    }
+   64	
+   65	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent01.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	
+    8	
+    9	// the four tools things we'll use to draw
+   10	
+   11	import java.awt.geom.Line2D;  // single lines
+   12	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   13	import java.awt.Rectangle;  // squares and rectangles
+   14	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   15	
+   16	
+   17	import java.awt.geom.Rectangle2D; // for rectangles drawing with Doubles
+   18	
+   19	import java.awt.Color; // class for Colors
+   20	import java.awt.Shape; // Shape interface
+   21	import java.awt.Stroke; // Stroke interface
+   22	import java.awt.BasicStroke; // class that implements stroke
+   23	
+   24	/**
+   25	   A component that draws a Picture by Phill Conrad
+   26	   
+   27	   @author Phill Conrad (original drawing)
+   28	   @version for CS56, W11, UCSB, 04/29/2009
+   29	   
+   30	*/
+   31	
+   32	
+   33	public class PictureComponent01 extends JComponent
+   34	{  
+   35	
+   36	    /** The paintComponent method is always required if you want
+   37	     * any graphics to appear in your JComponent.    
+   38	     * 
+   39	     * There is a paintComponent
+   40	     * method that is created for you in the JComponent class, but it
+   41	     * doesn't do what we want, so we have to "override" that method with
+   42	     * our own method.  
+   43	     */
+   44	    
+   45	   public void paintComponent(Graphics g)
+   46	   {  
+   47	
+   48	       Graphics2D g2 = (Graphics2D) g;
+   49	
+   50	       // Call a static method for drawing picture 2
+   51	
+   52	       AllMyDrawings.drawPicture1(g2);
+   53	
+   54	   }
+   55	        
+   56	  
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent01.java Page 2
+
+
+   57	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent02.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	
+    8	
+    9	// the four tools things we'll use to draw
+   10	
+   11	import java.awt.geom.Line2D;  // single lines
+   12	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   13	import java.awt.Rectangle;  // squares and rectangles
+   14	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   15	
+   16	
+   17	import java.awt.geom.Rectangle2D; // for rectangles drawing with Doubles
+   18	
+   19	import java.awt.Color; // class for Colors
+   20	import java.awt.Shape; // Shape interface
+   21	import java.awt.Stroke; // Stroke interface
+   22	import java.awt.BasicStroke; // class that implements stroke
+   23	
+   24	/**
+   25	   A component that draws a Picture by Phill Conrad
+   26	   
+   27	   @author Phill Conrad (original drawing)
+   28	   @version for CS56, W11, UCSB, 04/29/2009
+   29	   
+   30	*/
+   31	
+   32	
+   33	public class PictureComponent02 extends JComponent
+   34	{  
+   35	
+   36	    /** The paintComponent method is always required if you want
+   37	     * any graphics to appear in your JComponent.    
+   38	     * 
+   39	     * There is a paintComponent
+   40	     * method that is created for you in the JComponent class, but it
+   41	     * doesn't do what we want, so we have to "override" that method with
+   42	     * our own method.  
+   43	     */
+   44	    
+   45	   public void paintComponent(Graphics g)
+   46	   {  
+   47	
+   48	       Graphics2D g2 = (Graphics2D) g;
+   49	
+   50	       // Call a static method for drawing picture 2
+   51	
+   52	       AllMyDrawings.drawPicture2(g2);
+   53	
+   54	   }
+   55	        
+   56	  
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent02.java Page 2
+
+
+   57	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent03.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	
+    8	
+    9	// the four tools things we'll use to draw
+   10	
+   11	import java.awt.geom.Line2D;  // single lines
+   12	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   13	import java.awt.Rectangle;  // squares and rectangles
+   14	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   15	
+   16	
+   17	import java.awt.geom.Rectangle2D; // for rectangles drawing with Doubles
+   18	
+   19	import java.awt.Color; // class for Colors
+   20	import java.awt.Shape; // Shape interface
+   21	import java.awt.Stroke; // Stroke interface
+   22	import java.awt.BasicStroke; // class that implements stroke
+   23	
+   24	/**
+   25	   A component that draws a Picture by Phill Conrad
+   26	   
+   27	   @author Phill Conrad (original drawing)
+   28	   @version for CS56, W11, UCSB, 04/29/2009
+   29	   
+   30	*/
+   31	
+   32	
+   33	public class PictureComponent03 extends JComponent
+   34	{  
+   35	
+   36	    /** The paintComponent method is always required if you want
+   37	     * any graphics to appear in your JComponent.    
+   38	     * 
+   39	     * There is a paintComponent
+   40	     * method that is created for you in the JComponent class, but it
+   41	     * doesn't do what we want, so we have to "override" that method with
+   42	     * our own method.  
+   43	     */
+   44	    
+   45	   public void paintComponent(Graphics g)
+   46	   {  
+   47	
+   48	       Graphics2D g2 = (Graphics2D) g;
+   49	
+   50	       AllMyDrawings.drawPicture3(g2);
+   51	
+   52	   }  
+   53	}
+
+
+
+
+
+
+
+
+
+
+2012-02-16 23:28 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	// the four tools things we'll use to draw
+    8	
+    9	import java.awt.geom.Line2D;  // single lines
+   10	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   11	import java.awt.Rectangle;  // squares and rectangles
+   12	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   13	
+   14	
+   15	/**
+   16	   A component that draws a Picture by Phill Conrad
+   17	   
+   18	   @author Phill Conrad (original drawing)
+   19	   @author Nicholas Marks
+   20	   @version for UCSB CS56, S11, 02/09/2012
+   21	
+   22	   
+   23	*/
+   24	
+   25	// Your class should "extend JComponent
+   26	// This is "inheritance", which we'll start readina about in Chapter 10
+   27	// It means that PictureComponent "is a" JComponent
+   28	//   that is, a special type of JComponent that is for a specific purpose
+   29	
+   30	public class PictureComponent extends JComponent
+   31	{  
+   32	
+   33	    /** The paintComponent method is always required if you want
+   34	     * any graphics to appear in your JComponent.    
+   35	     * 
+   36	     * There is a paintComponent
+   37	     * method that is created for you in the JComponent class, but it
+   38	     * doesn't do what we want, so we have to "override" that method with
+   39	     * our own method.  
+   40	     * 
+   41	     * This overriding is typical when inheritance is used.
+   42	     * In inheritance, you take something that is a "basic" version of
+   43	     * what you want, then you "trick it out" with your own custom features.
+   44	     * Sort of a "pimp my Java class" kind of thing.
+   45	     */
+   46	    
+   47	   public void paintComponent(Graphics g)
+   48	   {  
+   49	      // Recover Graphics2D--we always do this.
+   50	      // See sections 2.12, p. 60-61 for an explanation
+   51	      
+   52	      Graphics2D g2 = (Graphics2D) g;
+   53	
+   54	      // Now the fun part---we draw stuff!
+   55	      // @@@ YOU'LL CUSTOMIZE EVERYTHING BELOW THIS LINE
+   56	      
+
+
+
+
+
+
+
+2012-02-16 23:28 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent.java Page 2
+
+
+   57	      Rectangle house = new Rectangle(100, 200, 100, 100);
+   58	      g2.draw( house);
+   59	
+   60	       // lroof and rroof are the left and right sides of the roof,
+   61	       Line2D.Double lroof = new Line2D.Double(100, 200, 150, 150);
+   62	       Line2D.Double rroof = new Line2D.Double(150,150, 200,200);
+   63	       
+   64	       g2.draw(lroof);
+   65	       g2.draw(rroof);
+   66	
+   67	       // now a snowman: three circles
+   68	       // here we use constants, so that if we want to change 
+   69	       // the dimensions later, or move the snowman around,
+   70	       // it becomes easier.
+   71	       // Instead of doing the math ourselves, and putting "hard coded numbers"
+   72	       // in the constructors for the Ellipses, we let the computer do the math!
+   73	       
+   74	       final double bottomRadius = 20;
+   75	       final double middleRadius = 15;
+   76	       final double topRadius = 10;
+   77	       final double snowManCenterBottomX = 400;
+   78	       final double snowManCenterBottomY = 300;
+   79	       
+   80	       Circle snowManBottomCircle = 
+   81	           new Circle
+   82	           (
+   83	             snowManCenterBottomX,
+   84	             snowManCenterBottomY - bottomRadius,
+   85	             bottomRadius
+   86	           );
+   87	      g2.draw(snowManBottomCircle);
+   88	      
+   89	      Circle snowManMiddleCircle = 
+   90	           new Circle
+   91	           (
+   92	             snowManCenterBottomX,
+   93	             snowManCenterBottomY - bottomRadius * 2 - middleRadius,
+   94	             middleRadius
+   95	           );
+   96	       g2.draw(snowManMiddleCircle);
+   97	
+   98	       // @@@ ADD CODE HERE TO DRAW THE TOP CIRCLE
+   99		Circle snowManTopCircle =      
+  100		   new Circle
+  101		   (
+  102		     snowManCenterBottomX,
+  103		     snowManCenterBottomY - bottomRadius * 2 - middleRadius * 2 - topRadius,
+  104		     topRadius
+  105		   );
+  106		g2.draw(snowManTopCircle);    
+  107	       
+  108	       // @@@ FINALLY, SIGN AND LABEL YOUR DRAWING
+  109	       
+  110	       g2.drawString("A house and a snowman, by Phill Conrad", 20,20);
+  111	       g2.drawString("Top of snowman added by Nicholas Marks and Marco Sedano", 20,40);
+  112	    }
+
+
+
+
+
+
+
+2012-02-16 23:28 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureComponent.java Page 3
+
+
+  113	
+  114	        
+  115	  
+  116	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureViewer01.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import javax.swing.JFrame;
+    3	
+    4	/** A viewer class to see a picture I drew with 
+    5	 *  just three simple Java graphics objects, namely
+    6	 *  Rectangle, Line2D.Double, Ellipse2D.Double
+    7	 *  
+    8	 * @author P. Conrad 
+    9	 * @version for UCSB CS56, W12, 02/09/2011
+   10	 */
+   11	
+   12	public class PictureViewer01
+   13	{
+   14	   public static void main(String[] args)
+   15	   {
+   16	      JFrame frame = new JFrame();
+   17	      
+   18	      // Set the size to whatever size you like (width, height)
+   19	      // For projects you turn in, lets not get any bigger than 640,480
+   20	      
+   21	      frame.setSize(640,480); // @@@ MODIFY THIS LINE IF YOU LIKE
+   22	      
+   23	      // Set your own title
+   24	      frame.setTitle("Phill's First Drawing"); // @@@ MODIFY THIS LINE
+   25	      
+   26	      // Always do this so that the red X (or red circle) works
+   27	      // to close the window. 
+   28	      
+   29	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   30	      
+   31	      // Instantiate your drawing as a "component"
+   32	      
+   33	      PictureComponent01 component = new PictureComponent01();
+   34	      
+   35	      // Always add your component to the frame 
+   36	      // and then make the window visible
+   37	      
+   38	      frame.add(component);
+   39	      frame.setVisible(true);
+   40	   }
+   41	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureViewer02.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import javax.swing.JFrame;
+    3	
+    4	/** A viewer class to see a picture I drew with 
+    5	 *  just three simple Java graphics objects, namely
+    6	 *  Rectangle, Line2D.Double, Ellipse2D.Double
+    7	 *  
+    8	 * @author P. Conrad 
+    9	 * @version for UCSB CS56, W11, 02/09/2011
+   10	 */
+   11	
+   12	public class PictureViewer02
+   13	{
+   14	   public static void main(String[] args)
+   15	   {
+   16	      JFrame frame = new JFrame();
+   17	      
+   18	      // Set the size to whatever size you like (width, height)
+   19	      // For projects you turn in, lets not get any bigger than 640,480
+   20	      
+   21	      frame.setSize(640,480); // @@@ MODIFY THIS LINE IF YOU LIKE
+   22	      
+   23	      // Set your own title
+   24	      frame.setTitle("Phill's lab08 Drawing"); // @@@ MODIFY THIS LINE
+   25	      
+   26	      // Always do this so that the red X (or red circle) works
+   27	      // to close the window. 
+   28	      
+   29	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   30	      
+   31	      // Instantiate your drawing as a "component"
+   32	      
+   33	      PictureComponent02 component = new PictureComponent02();
+   34	      
+   35	      // Always add your component to the frame 
+   36	      // and then make the window visible
+   37	      
+   38	      frame.add(component);
+   39	      frame.setVisible(true);
+   40	   }
+   41	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureViewer03.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import javax.swing.JFrame;
+    3	
+    4	/** A viewer class to see a picture I drew with 
+    5	 *  just three simple Java graphics objects, namely
+    6	 *  Rectangle, Line2D.Double, Ellipse2D.Double
+    7	 *  
+    8	 * @author P. Conrad 
+    9	 * @version for UCSB CS56, W11, 02/09/2011
+   10	 */
+   11	
+   12	public class PictureViewer03
+   13	{
+   14	   public static void main(String[] args)
+   15	   {
+   16	      JFrame frame = new JFrame();
+   17	      
+   18	      // Set the size to whatever size you like (width, height)
+   19	      // For projects you turn in, lets not get any bigger than 640,480
+   20	      
+   21	      frame.setSize(640,480); // @@@ MODIFY THIS LINE IF YOU LIKE
+   22	      
+   23	      // Set your own title
+   24	      frame.setTitle("Phill's lab08 Drawing"); // @@@ MODIFY THIS LINE
+   25	      
+   26	      // Always do this so that the red X (or red circle) works
+   27	      // to close the window. 
+   28	      
+   29	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   30	      
+   31	      // Instantiate your drawing as a "component"
+   32	      
+   33	      PictureComponent03 component = new PictureComponent03();
+   34	      
+   35	      // Always add your component to the frame 
+   36	      // and then make the window visible
+   37	      
+   38	      frame.add(component);
+   39	      frame.setVisible(true);
+   40	   }
+   41	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-15 15:15 src/edu/ucsb/cs56/W12/pconrad/lab04/PictureViewer.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import javax.swing.JFrame;
+    3	
+    4	/** A viewer class to see a picture I drew with 
+    5	 *  just three simple Java graphics objects, namely
+    6	 *  Rectangle, Line2D.Double, Ellipse2D.Double
+    7	 *  
+    8	 * @author P. Conrad 
+    9	 * @version for UCSB CS56, W12, 02/09/2012
+   10	 */
+   11	
+   12	public class PictureViewer
+   13	{
+   14	   public static void main(String[] args)
+   15	   {
+   16	      JFrame frame = new JFrame();
+   17	      
+   18	      // Set the size to whatever size you like (width, height)
+   19	      // For projects you turn in, lets not get any bigger than 640,480
+   20	      
+   21	      frame.setSize(640,480); // @@@ MODIFY THIS LINE IF YOU LIKE
+   22	      
+   23	      // Set your own title
+   24	      frame.setTitle("Phill's Drawing"); // @@@ MODIFY THIS LINE
+   25	      
+   26	      // Always do this so that the red X (or red circle) works
+   27	      // to close the window. 
+   28	      
+   29	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   30	      
+   31	      // Instantiate your drawing as a "component"
+   32	      
+   33	      PictureComponent component = new PictureComponent();
+   34	      
+   35	      // Always add your component to the frame 
+   36	      // and then make the window visible
+   37	      
+   38	      frame.add(component);
+   39	      frame.setVisible(true);
+   40	   }
+   41	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/ShapeTransforms.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.Graphics;
+    3	import java.awt.Graphics2D;
+    4	import javax.swing.JPanel;
+    5	import javax.swing.JComponent;
+    6	
+    7	// the four tools things we'll use to draw
+    8	
+    9	import java.awt.geom.Line2D;  // single lines
+   10	import java.awt.geom.Ellipse2D;  // ellipses and circles
+   11	import java.awt.geom.Rectangle2D; // for the bounding box
+   12	import java.awt.Rectangle;  // squares and rectangles
+   13	import java.awt.geom.GeneralPath; // combinations of lines and curves
+   14	import java.awt.geom.AffineTransform; // translation, rotation, scale
+   15	import java.awt.Shape; // general class for shapes
+   16	import java.awt.Color; // class for Colors
+   17	
+   18	/**
+   19	   Some static methods for transforming objects that implement
+   20	   the java.awt.Shape interface
+   21	   
+   22	   @author Phill Conrad 
+   23	   @version for CS56, W11, UCSB, 02/23/2011
+   24	   @see java.awt.Shape
+   25	*/
+   26	
+   27	public class ShapeTransforms
+   28	{  
+   29	    /** A static method to flip a shape horizontally
+   30	     *
+   31	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+   32	     *    that implements the Shape interface )
+   33	     * @return A copy of the Shape, flipped vertically
+   34	     */
+   35	    public static Shape horizontallyFlippedCopyOf(Shape s) 
+   36	    { return scaledCopyOf(s, -1, 1);}
+   37	
+   38	    /** A static method to flip a shape horizontally
+   39	     *
+   40	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+   41	     *    that implements the Shape interface )
+   42	     * @return A copy of the Shape, flipped vertically
+   43	     */
+   44	
+   45	    public static Shape verticallyFlippedCopyOf(Shape s) 
+   46	    {  return scaledCopyOf(s, 1, -1); }
+   47	
+   48	    /** A static method to translate a shape
+   49	     *
+   50	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+   51	     *    that implements the Shape interface )
+   52	     * @param tx how far to translate in x direction
+   53	     * @param ty how far to translate in y direction
+   54	     * @return A copy of the Shape, translated
+   55	     */
+   56	
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/ShapeTransforms.java Page 2
+
+
+   57	    public static Shape translatedCopyOf(Shape s, double tx, double ty) 
+   58	    { 
+   59		AffineTransform af = new AffineTransform();   
+   60		af.translate(tx, ty);
+   61		return af.createTransformedShape(s);         
+   62	    }
+   63	     
+   64	    /** A static method to scale a shape with respect to the upper left hand corner of its bounding box.
+   65	     *
+   66	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+   67	     *    that implements the Shape interface )
+   68	     * @return A copy of the Shape, scaled with respect to its upper left corner    */
+   69	
+   70	    public static Shape scaledCopyOf(Shape s, double sx, double sy)
+   71	    {       
+   72		AffineTransform af = new AffineTransform();   
+   73		Rectangle2D box = s.getBounds2D(); 
+   74	       
+   75		double x = box.getX();
+   76		double y = box.getY();
+   77	
+   78		// Note: the transformations get applied IN REVERSE ORDER!
+   79		af.translate(x,y);
+   80		af.scale(sx, sy);
+   81		af.translate(-x, -y);
+   82	             
+   83		return af.createTransformedShape(s);
+   84	    }
+   85	
+   86	
+   87	    /** A static method to scale a shape with respect to the lower left hand corner of its bounding box.
+   88	     *
+   89	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+   90	     *    that implements the Shape interface )
+   91	     * @return A copy of the Shape, scaled with respect to its upper left corner    */
+   92	
+   93	    public static Shape scaledCopyOfLL(Shape s, double sx, double sy)
+   94	    {       
+   95		AffineTransform af = new AffineTransform();   
+   96		Rectangle2D box = s.getBounds2D(); 
+   97	       
+   98		double x = box.getX(); 
+   99		double y = box.getY() + box.getHeight();
+  100	
+  101		// Note: the transformations get applied IN REVERSE ORDER!
+  102		af.translate(x,y);
+  103		af.scale(sx, sy);
+  104		af.translate(-x, -y);
+  105	             
+  106		return af.createTransformedShape(s);
+  107	    }
+  108	
+  109	
+  110	    /** A static method to rotate a shape around its center 
+  111	     *
+  112	     * @param s  A shape (could be a Rectangle, GeneralPath, etc.--anything
+
+
+
+
+
+
+
+2012-02-16 21:20 src/edu/ucsb/cs56/W12/pconrad/lab04/ShapeTransforms.java Page 3
+
+
+  113	     *    that implements the Shape interface )
+  114	     * @return A copy of the Shape, rotated around its center     */
+  115	
+  116	    public static Shape rotatedCopyOf(Shape s, double angleInRadians)
+  117	    {
+  118		AffineTransform af = new AffineTransform();   
+  119		Rectangle2D box = s.getBounds2D(); 
+  120	       
+  121		double cx = box.getCenterX();
+  122		double cy = box.getCenterY();
+  123	
+  124		// NOTE: The transformations get applied IN REVERSE ORDER
+  125		af.translate(cx,cy);
+  126		af.rotate(angleInRadians);
+  127		af.translate(-cx, -cy);
+  128	             
+  129		return af.createTransformedShape(s);
+  130	    }
+  131	  
+  132	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2012-02-16 21:54 src/edu/ucsb/cs56/W12/pconrad/lab04/WritePictureToFile.java Page 1
+
+
+    1	package edu.ucsb.cs56.W12.pconrad.lab04;
+    2	import java.awt.image.BufferedImage;
+    3	import java.awt.Graphics2D;
+    4	import java.awt.Color;
+    5	import java.io.File;
+    6	import javax.imageio.ImageIO;
+    7	import java.io.IOException;
+    8	
+    9	
+   10	
+   11	
+   12	/**
+   13	 *  A class with a main method that can write a drawing to a graphics file.
+   14	 *  
+   15	 *  @author P. Conrad, 
+   16	 *  @version for CS56, W11 UCSB
+   17	 */
+   18	
+   19	public class WritePictureToFile
+   20	{
+   21	    public static void usage()
+   22	    {
+   23	       System.out.println("Usage: java WritePictureToFile mypicture");
+   24	       // @@@ modify the next line to describe your picture
+   25	       System.out.println(" Nicholas Marks Writes a lovely picture of Stick Figures to mypicture.png"); 
+   26	    }
+   27	
+   28	    /** Write the drawFourCoffeeCups picture to a file.
+   29	     * 
+   30	     * @param args  The first command line argument is the file to write to.  We leave off the extension
+   31	     *              because that gets put on automatically.
+   32	     */
+   33	
+   34	   public static void main(String[] args)
+   35	   {
+   36	     // make sure we have exactly one command line argument  
+   37	     if (args.length != 1)
+   38	     {
+   39	        usage();
+   40	        System.exit(1);
+   41	     }
+   42	        
+   43	     String outputfileName = args[0]; // the first command line argument
+   44	     
+   45	     final int WIDTH = 640;
+   46	     final int HEIGHT = 480;
+   47	         
+   48	     // create a new image
+   49	     // TYPE_INT_ARGB is "RGB image" with transparency (A = alpha channel)
+   50	     
+   51	     BufferedImage bi = 
+   52	        new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB); 
+   53	
+   54	     Graphics2D g2 = bi.createGraphics();
+   55	      
+   56	     AllMyDrawings.drawPicture2(g2); // draw four coffee cups
+
+
+
+
+
+
+
+2012-02-16 21:54 src/edu/ucsb/cs56/W12/pconrad/lab04/WritePictureToFile.java Page 2
+
+
+   57	      
+   58	     final String imageType = "png"; // choices: "gif", "png", "jpg"
+   59	      
+   60	     String fullFileName = ""; // must declare outside the try block, so we can see it inside the catch block
+   61	     
+   62	     try 
+   63	     {
+   64	        fullFileName = outputfileName + "." + imageType; // make the file name
+   65	        File outputfile = new File(fullFileName); // the file we will try to write
+   66	        ImageIO.write(bi, imageType, outputfile); // actually write it
+   67	        System.out.println("I created " + fullFileName); // tell the user
+   68	     } 
+   69	     catch (IOException e)
+   70	     {
+   71	      System.err.println("Sorry, an error occurred--I could not create "+ fullFileName +"\n The error was: "+ e.toString());
+   72	     }
+   73	
+   74	      
+   75	   }
+   76	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
